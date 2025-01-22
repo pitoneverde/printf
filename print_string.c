@@ -7,11 +7,11 @@ int print_string_flags(char *str, t_flags flags)
 	int printed;
 
 	printed = 0;
+	if (!str)
+		return(print_string("(null)"));
 	len = ft_strlen(str);
 	if (flags.prec >= 0 && flags.prec < len)
 		len = flags.prec;
-	if (!str)
-		str = "(null)";
 	padding = flags.width - len;
 	if (padding > 0 && !flags.left)
 		printed += pad(padding, ' ');
@@ -27,6 +27,8 @@ int print_string(char *str)
 
 	i = 0;
 	printed = 0;
+	if(!str)
+		str = "(null)";
 	while (str[i])
 		printed += print_char(str[i++]);
 	return (printed);

@@ -24,20 +24,20 @@ typedef struct s_flags
 
 // main
 int ft_printf(const char *format, ...);
-int ft_printformat(const char *format, int i, va_list args);
+int ft_printformat(const char *format, int *i, va_list args);
 
 // utils
 int pad(int padding, char with);
 int print_num_string(char *num, int padding, int len, t_flags *flags);
 char *utoa(unsigned int n);
-char *build_hex(unsigned long long n, const char *digits);
-int pad_hex(char *num, int padding, int len, t_flags *flags);
+char *build_hex(unsigned int n, const char *digits);
+int pad_hex(int padding, int len, t_flags *flags);
 
 // helpers
-void parse_flags(const char **fmt, t_flags *flags);
+void parse_flags(const char *fmt, int *i, t_flags *flags);
 int print_char(int c);
-int print_hex_lower(unsigned long long n, t_flags flags);
-int print_hex_upper(unsigned long long n, t_flags flags);
+int print_hex_lower(unsigned int n, t_flags flags);
+int print_hex_upper(unsigned int n, t_flags flags);
 int print_int(int n, t_flags flags);
 int print_pointer(void *ptr, t_flags flags);
 int print_string_flags(char *str, t_flags flags);

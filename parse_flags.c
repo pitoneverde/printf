@@ -1,9 +1,9 @@
 #include "ft_printf.h"
 
-static int parse_width(const char **fmt);
-static int parse_precision(const char **fmt);
+static int parse_width(const char *fmt, int *i);
+static int parse_precision(const char *fmt, int *i);
 
-void parse_flags(const char **fmt, t_flags *flags)
+void parse_flags(const char *fmt, int *i, t_flags *flags)
 {
 	flags->left = 0;
 	flags->plus = 0;
@@ -11,49 +11,50 @@ void parse_flags(const char **fmt, t_flags *flags)
 	flags->space = 0;
 	flags->prec = -1;
 	flags->neg = 0;
+	flags->hash = 0;
 
-	while (**fmt == '-' || **fmt == '+' || **fmt == '0' || **fmt == ' ')
+	while (fmt[*i] == '-' || fmt[*i] == '+' || fmt[*i] == '0' || fmt[*i] == ' ' || fmt[*i] == '#')
 	{
-		if (**fmt == '-')
+		if (fmt[*i] == '-')
 			flags->left = 1;
-		if (**fmt == '+')
+		if (fmt[*i] == '+')
 			flags->plus = 1;
-		if (**fmt == '0')
+		if (fmt[*i] == '0')
 			flags->zero = 1;
-		if (**fmt == ' ')
+		if (fmt[*i] == ' ')
 			flags->space = 1;
-		if (**fmt == '#')
+		if (fmt[*i] == '#')
 			flags->hash = 1;			
-		(*fmt)++;
+		(*i)++;
 	}
-	flags->width = parse_width(fmt);
-	flags->prec = parse_precision(fmt);
+	flags->width = parse_width(fmt, i);
+	flags->prec = parse_precision(fmt, i);
 }
 
-static int parse_width(const char **fmt)
+static int parse_width(const char *fmt, int *i)
 {
 	int tmp;
 
-	if (ft_isdigit(**fmt))
+	if (ft_isdigit(fmt[*i]))
 	{
-		tmp = ft_atoi(*fmt);
-		while (ft_isdigit(**fmt))
-			(*fmt)++;
+		tmp = ft_atoi(&fmt[*i]);
+		while (ft_isdigit(fmt[*i]))
+			(*i)++;
 		return (tmp);
 	}
 	return (0);
 }
 
-static int parse_precision(const char **fmt)
+static int parse_precision(const char *fmt, int *i)
 {
 	int tmp;
 
-	if (**fmt == '.')
+	if (fmt[*i] == '.')
 	{
-		(*fmt)++;
-		tmp = ft_atoi(*fmt);
-		while (ft_isdigit(**fmt))
-			(*fmt)++;
+		(*i)++;
+		tmp = ft_atoi(&fmt[*i]);
+		while (ft_isdigit(fmt[*i]))
+			(*i)++;
 		return (tmp);
 	}
 	return (0);
