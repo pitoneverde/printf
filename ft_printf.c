@@ -1,15 +1,15 @@
 #include "ft_printf.h"
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	int i;
-	int len;
-	va_list args;
+	int		i;
+	int		len;
+	va_list	args;
 
 	i = 0;
 	len = 0;
 	va_start(args, format);
-	while(format[i])
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
@@ -26,15 +26,15 @@ int ft_printf(const char *format, ...)
 	return (len);
 }
 
-int ft_printformat(const char *format, int *i, va_list args)
+int	ft_printformat(const char *format, int *i, va_list args)
 {
-	t_flags flags;
-	
+	t_flags	flags;
+
 	parse_flags(format, i, &flags);
 	if (format[*i] == 's')
-		return(print_string_flags(va_arg(args, char *), flags));
+		return (print_string_flags(va_arg(args, char *), flags));
 	else if (format[*i] == 'c')
-		return (print_char(va_arg(args, int)));
+		return (print_char_flags(va_arg(args, int), flags));
 	else if (format[*i] == 'p')
 		return (print_pointer(va_arg(args, void *), flags));
 	else if (format[*i] == 'd' || format[*i] == 'i')
