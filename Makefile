@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_printf.c ft_printf_utils.c \
 		parse_flags.c print_char.c print_string.c \
@@ -12,10 +12,10 @@ LIBFT = libft
 
 all: $(NAME)
 
-$(LIBFT):
+$(LIBFT)/libft.a:
 	$(MAKE) all -C $(LIBFT)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT)/libft.a $(OBJ)
 	cp $(LIBFT)/libft.a $(NAME)
 	ar rcs $(NAME) $(OBJ)
 	
@@ -26,12 +26,12 @@ clean:
 	rm -f $(OBJ)
 	$(MAKE) clean -C $(LIBFT)
 
-fclean: clean
+fclean:
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT)
 
-re: fclean all
+re: clean all
 
 bonus: all
 
-.PHONY: $(LIBFT)
+.PHONY: all clean fclean re bonus

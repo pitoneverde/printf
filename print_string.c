@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_string.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 17:14:36 by sabruma           #+#    #+#             */
+/*   Updated: 2025/01/29 17:14:37 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	print_string_flags(char *str, t_flags flags)
@@ -23,7 +35,7 @@ int	print_string_flags(char *str, t_flags flags)
 	return (printed);
 }
 
-int print_string_len(char *str, int len)
+int	print_string_len(char *str, int len)
 {
 	int	printed;
 	int	i;

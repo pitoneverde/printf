@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 17:13:43 by sabruma           #+#    #+#             */
+/*   Updated: 2025/01/29 17:13:47 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-// alloca 17 perché un unsigned long long è max 16 cifre hex
 int	pad_hex(int padding, int len, t_flags flags)
 {
 	int	printed;
@@ -16,7 +27,7 @@ int	pad_hex(int padding, int len, t_flags flags)
 // change order to not get +       144 unstead of          +144
 int	handle_flags_num(char *num, int padding, int len, t_flags flags)
 {
-	int	printed;
+	int		printed;
 	char	pad_char;
 
 	printed = 0;
@@ -47,7 +58,6 @@ int	print_num_string(char *num, int len, t_flags flags)
 	{
 		printed += print_char('+');
 	}
-	
 	printed += print_string(num);
 	if (flags.width > len + flags.neg && flags.left)
 		printed += pad(flags.width - len - flags.neg, ' ');
